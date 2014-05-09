@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JList;
 
+import gui.sysadmin.SysadminController;
 import util.*;
 
 public interface GenomizerView {
@@ -32,10 +33,6 @@ public interface GenomizerView {
     public void addRawToProfileDataListener(ActionListener listener);
 
     public void addRawToRegionDataListener(ActionListener listener);
-
-    public void addAddAnnotationListener(ActionListener addAnnotationListener);
-
-    public void addAddPopupListener(ActionListener addPopupListener);
 
     public void addAddToExistingExpButtonListener(
 	    ActionListener addToExistingExpButtonListener);
@@ -78,16 +75,6 @@ public interface GenomizerView {
 
     public UploadTab getUploadTab();
 
-    public String getNewAnnotationName();
-
-    public String[] getNewAnnotionCategories();
-
-    public boolean getNewAnnotationForcedValue();
-
-    public int getSelectedRowAtAnnotationTable();
-
-    public AnnotationDataType getSelectedAnnoationAtAnnotationTable();
-
     public ArrayList<FileData> getAllMarkedFileData();
 
     public ExperimentData[] getSelectedExperimentsInSearch();
@@ -102,21 +89,14 @@ public interface GenomizerView {
 
     public void updateQuerySearchResults(ExperimentData[] searchResults);
 
-    public void setAnnotationTableData(AnnotationDataType[] annotations);
 
     public void setSearchAnnotationTypes(AnnotationDataType[] annotationTypes);
 
     public void setProccessFileList(ArrayList<FileData> arrayList);
 
-    public void annotationPopup();
-
-    public void closePopup();
-
     public void printToConvertText(String message);
 
     public ArrayList<FileData> getWorkspaceSelectedFiles();
-
-    public void addDeleteAnnotationListener(ActionListener listener);
 
     public void createNewExp(AnnotationDataType[] annotations);
 
@@ -131,5 +111,7 @@ public interface GenomizerView {
 	public void setBowtieParameters();
 
 	public JList getfileList();
+
+    void setSysadminController(SysadminController sysadminController);
 }
 

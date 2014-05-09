@@ -13,6 +13,8 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -20,12 +22,15 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
+import gui.sysadmin.SysadminController;
 import model.GenomizerModel;
+import requests.AddAnnotationRequest;
 import util.*;
 
 public class Controller {
 
-	private GenomizerView view;
+    private final SysadminController sysController;
+    private GenomizerView view;
 	private GenomizerModel model;
 	private final JFileChooser fileChooser = new JFileChooser();
 
@@ -42,20 +47,18 @@ public class Controller {
 		view.addScheduleFileListener(new ScheduleFileListener());
 		view.addDownloadFileListener(new DownloadWindowListener());
 		view.addSearchResultsDownloadListener(new DownloadSearchListener());
-		// view.addAddAnnotationListener(new AddNewAnnotationListener());
-		view.addAddPopupListener(new AddPopupListener());
 		view.addAddToExistingExpButtonListener(new AddToExistingExpButtonListener());
 		view.addSelectFilesToUploadButtonListener(new SelectFilesToUploadButtonListener());
 		view.addUploadToExperimentButtonListener(new UploadToExperimentButtonListener());
-		view.setAnnotationTableData(model.getAnnotations());
 		view.addUpdateSearchAnnotationsListener(new updateSearchAnnotationsListener());
 		view.addProcessFileListener(new ProcessFileListener());
 		view.addSearchToWorkspaceListener(new SearchToWorkspaceListener());
-		view.addDeleteAnnotationListener(new DeleteAnnotationListener());
 		view.addNewExpButtonListener(new NewExpButtonListener());
 		view.addSelectButtonListener(new SelectFilesToNewExpListener());
 		view.addUploadButtonListener(new UploadNewExpListener());
 		fileListAddMouseListener(view.getfileList());
+        view.setSysadminController(sysController = new SysadminController(
+                new SendDataObserver()));
 	}
 
 	class DownloadSearchListener implements ActionListener, Runnable {
@@ -102,84 +105,6 @@ public class Controller {
 			downloadWindow.addDownloadFileListener(new DownloadFileListener());
 		}
 
-	}
-
-	class DeleteAnnotationListener implements ActionListener, Runnable {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			new Thread(this).start();
-		}
-
-		@Override
-		public void run() {
-			AnnotationDataType annotationDataType = null;
-			try {
-				annotationDataType = view
-						.getSelectedAnnoationAtAnnotationTable();
-				if (JOptionPane.showConfirmDialog(null,
-						"Are you sure you want to delete the"
-								+ annotationDataType.name) == JOptionPane.YES_OPTION) {
-					if (model.deleteAnnotation(new DeleteAnnoationData(
-							annotationDataType))) {
-						JOptionPane.showMessageDialog(null,
-								annotationDataType.name + " has been remove!");
-						SwingUtilities.invokeLater(new Runnable() {
-
-							@Override
-							public void run() {
-								view.setAnnotationTableData(model
-										.getAnnotations());
-							}
-						});
-					} else {
-						JOptionPane.showMessageDialog(null,
-								"Could not remove annotation");
-					}
-				}
-			} catch (IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}
-
-		}
-	}
-
-	class AddPopupListener implements ActionListener, Runnable {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			new Thread(this).start();
-		}
-
-		@Override
-		public void run() {
-			view.annotationPopup();
-			view.addAddAnnotationListener(new AddNewAnnotationListener());
-		}
-	}
-
-	class AddNewAnnotationListener implements ActionListener, Runnable {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			new Thread(this).start();
-		}
-
-		@Override
-		public void run() {
-			String name = view.getNewAnnotationName();
-			String[] categories = view.getNewAnnotionCategories();
-			boolean forced = view.getNewAnnotationForcedValue();
-			try {
-				if (model.addNewAnnotation(name, categories, forced)) {
-					view.closePopup(); // Is this needed here?
-				} else {
-					JOptionPane.showMessageDialog(null,
-							"Could not create new annotation, check server?");
-				}
-			} catch (IllegalArgumentException e) {
-				JOptionPane.showMessageDialog(null, e.getMessage());
-			}
-			// Update annotationsearch?
-		}
 	}
 
 	class ConvertFileListener implements ActionListener, Runnable {
@@ -628,4 +553,33 @@ public class Controller {
 			}
 		});
 	}
+
+    class SendDataObserver implements Observer {
+        @Override
+        public void update(Observable o, Object arg) {
+
+            if (arg instanceof AddAnnotationRequest) {
+                addAnnotationRequest(arg);
+            }
+
+        }
+
+        private void addAnnotationRequest(Object arg) {
+
+            AddAnnotationRequest ann = (AddAnnotationRequest) arg;
+
+            try {
+                if (model.addNewAnnotation(ann.name, ann.type, ann.forced)) {
+
+                } else {
+                    JOptionPane.showMessageDialog(null,
+                            "Could not create new annotation, check server?");
+                }
+            } catch (IllegalArgumentException e) {
+                JOptionPane.showMessageDialog(null, e.getMessage());
+            }
+        }
+
+    }
+
 }

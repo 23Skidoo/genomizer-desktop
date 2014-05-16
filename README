@@ -9,14 +9,15 @@ Programvaruteknik, Umea University Spring 2014
 -------------------------------------------
 CHANGELOG v2.0 RELEASE DATE 14-05-16
 
-- Bugs reported by Yuri on 14-05-13 fixed
+- Bugs reported by Yuri on 14-05-13 fixed.
 - Changed Look & Feel to be more persistent over all platforms.
 - Search results can be sorted by columns and user can choose which annotations to view.
-- Upload to new Experiment
-- Upload files to existing Experiment
-- Drag and drop files to upload tab and they are added
+- Upload to new Experiment.
+- Upload files to existing Experiment.
+- Drag and drop files to upload tab and they are added.
+- Progress bars for uploading and downloading files.
 - Sending request for converting RawToProfile on Process, but all user choices are not implemented yet, and genome file chooser is not functional. 
-- Add and see active annotations under the Administration Tab
+- Add and see active annotations under the Administration Tab.
 
 --NOTES
 - Process is unfortunately still not working all the way, no file will be generated

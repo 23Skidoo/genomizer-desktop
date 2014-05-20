@@ -6,7 +6,6 @@ Programvaruteknik, Umea University Spring 2014
 **Bugs and problems are to be reported to the dev team as soon as possible, either by GitHub Issues or by mail to genomizer@mailinator.com**
 *See User Manual for instructions on using functionality*
 
-=============
 ##CHANGELOG v0.2.0 RELEASE DATE 14-05-20
 
 - Batch upload experiments
@@ -20,10 +19,9 @@ Programvaruteknik, Umea University Spring 2014
 - ~~Annotations are case sensitive~~
 - ~~Can not upload files with spaces in the name.~~
 - ~~Can not upload files that are compressed.~~
-- 
 
-------
 ##CHANGELOG v0.1.1 RELEASE DATE 14-05-16
+------
 
 - Bugs reported by Yuri on 14-05-13 fixed.
 - Changed Look & Feel to be more persistent over all platforms.

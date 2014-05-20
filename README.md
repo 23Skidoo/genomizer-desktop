@@ -14,7 +14,7 @@ Programvaruteknik, Umea University Spring 2014
 ###NOTES
 - Process has still not been ready for system testing
 - Drag & Drop is stable
-- Search Results updates itself
+- Search Results updates itself on changes
 - Minor design improvements
 - ~~Annotations are case sensitive~~
 - ~~Can not upload files with spaces in the name.~~

@@ -21,7 +21,7 @@ Programvaruteknik, Umea University Spring 2014
 - ~~Can not upload files that are compressed.~~
 
 ##CHANGELOG v0.1.1 RELEASE DATE 14-05-16
-------
+
 
 - Bugs reported by Yuri on 14-05-13 fixed.
 - Changed Look & Feel to be more persistent over all platforms.

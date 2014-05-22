@@ -57,15 +57,34 @@ public class DownloadHandler {
             }
             System.out.println(responseCode);
             InputStream in = conn.getInputStream();
+            boolean fileIsBinary = false;
+            byte[] buf = new byte[1024];
+            int length = in.read(buf, 0, 1024);
+            for(int i = 0; i < length; i++) {
+                String lineSep = System.getProperty("line.separator");
+                if(buf[i] == 0) {
+                    fileIsBinary = true;
+                    System.out.println("File is binary!");
+                    break;
+                }
+            }
+            FileOutputStream fileOut = new FileOutputStream(file);
+            fileOut.write(buf, 0, length);
+            String bufString = new String(buf);
+            bufString = bufString.replaceAll("\\r\\n", "");
+            bufString = bufString.replaceAll("\\n", "");
+            bufString = bufString.replaceAll("\\r", "");
             String buffer;
             totalDownload = 0;
             int previousDownload = 0;
-
-            FileOutputStream fileOut = new FileOutputStream(file);
             Long previousTime = System.currentTimeMillis();
-            if (!isBinaryFile()) {
+            if (!fileIsBinary) {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                 BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+                writer.write(bufString);
+                totalDownload += bufString.length();
+                writer.newLine();
+                totalDownload += System.getProperty("line.separator").length();
                 while ((buffer = reader.readLine()) != null && !isFinished()) {
                     writer.write(buffer);
                     totalDownload += buffer.length();

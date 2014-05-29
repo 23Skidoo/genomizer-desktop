@@ -375,7 +375,9 @@ public class QueryBuilderRow extends JPanel {
     }
     
     public void setEnabled(boolean enabled) {
-        annotationBox.setEnabled(enabled);
+        if (annotationBox != null) {
+            annotationBox.setEnabled(enabled);
+        }
         annotationAlternatives.setEnabled(enabled);
         logicBox.setEnabled(enabled);
         textField.setEnabled(enabled);

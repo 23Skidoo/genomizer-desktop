@@ -50,6 +50,9 @@ public class QuerySearchTab extends JPanel {
     private TreeTable resultsTable;
     private AnnotationDataType[] annotationTypes;
     private ActiveSearchPanel activePanel;
+    private JRadioButton queryBuilderButton;
+    private JRadioButton manualEditButton;
+    private ButtonGroup buttonGroup;
     
     /**
      * Create a query search tab
@@ -164,9 +167,9 @@ public class QuerySearchTab extends JPanel {
         
         JScrollPane searchScroll = new JScrollPane(searchArea);
         searchScroll.setPreferredSize(new Dimension(800, 35));
-        JRadioButton queryBuilderButton = new JRadioButton("Query Builder");
-        JRadioButton manualEditButton = new JRadioButton("Manual edit");
-        ButtonGroup buttonGroup = new ButtonGroup();
+        queryBuilderButton = new JRadioButton("Query Builder");
+        manualEditButton = new JRadioButton("Manual edit");
+        buttonGroup = new ButtonGroup();
         manualEditButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -268,7 +271,11 @@ public class QuerySearchTab extends JPanel {
                 updateAnnotationsButton.doClick();
                 rowList = new CopyOnWriteArrayList<QueryBuilderRow>();
                 addRow();
-                searchArea.setText("");
+                if (manualEditButton != null && buttonGroup != null
+                        && buttonGroup.isSelected(manualEditButton.getModel())) {
+                    buttonGroup.setSelected(manualEditButton.getModel(), false);
+                    buttonGroup.setSelected(queryBuilderButton.getModel(), true);
+                }
             }
         });
     }

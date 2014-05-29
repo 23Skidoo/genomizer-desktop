@@ -135,7 +135,7 @@ public class QueryBuilderRow extends JPanel {
     private void setPlusButton() {
         plusButton = CustomButtonFactory.makeCustomButton(
                 IconFactory.getPlusIcon(15, 15),
-                IconFactory.getPlusIcon(17, 17), 17, 25, null);
+                IconFactory.getPlusIcon(17, 17), 17, 17, null);
         plusButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,7 +152,7 @@ public class QueryBuilderRow extends JPanel {
     private void setMinusButton() {
         minusButton = CustomButtonFactory.makeCustomButton(
                 IconFactory.getMinusIcon(15, 15),
-                IconFactory.getMinusIcon(17, 17), 17, 25, null);
+                IconFactory.getMinusIcon(17, 17), 17, 17, null);
         final QueryBuilderRow row = this;
         minusButton.addActionListener(new ActionListener() {
             @Override

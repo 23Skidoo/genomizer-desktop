@@ -275,6 +275,7 @@ public class QuerySearchTab extends JPanel {
                         && buttonGroup.isSelected(manualEditButton.getModel())) {
                     buttonGroup.setSelected(manualEditButton.getModel(), false);
                     buttonGroup.setSelected(queryBuilderButton.getModel(), true);
+                    searchArea.setEditable(false);
                 }
             }
         });

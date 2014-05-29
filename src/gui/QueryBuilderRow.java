@@ -231,11 +231,11 @@ public class QueryBuilderRow extends JPanel {
      *            - the annotation alternatives
      */
     private void setAnnotationAlternatives(String[] alternatives) {
-        annotationAlternatives = new JComboBox(alternatives);
-        /* Setting the width of the combobox */
-        // annotationAlternatives
-        // .setPrototypeDisplayValue("AAAAAAAAAAAAAAAAAAAAAAA"
-        // + "AAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        try {
+            annotationAlternatives = new JComboBox(alternatives);
+        } catch (ClassCastException e) {
+            annotationAlternatives = new JComboBox();
+        }
         annotationAlternatives.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

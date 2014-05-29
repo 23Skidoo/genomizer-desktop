@@ -478,9 +478,9 @@ public class Model implements GenomizerModel {
         Connection conn = connFactory.makeConnection();
         conn.sendRequest(request, userID, JSON);
         if (conn.getResponseCode() == 201) {
-            // System.err.println("Sent " + request.requestName + " success!");
             return true;
         }
+        JOptionPane.showMessageDialog(null, conn.getResponseBody());
         return false;
     }
 

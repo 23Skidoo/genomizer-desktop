@@ -406,6 +406,7 @@ public class Model implements GenomizerModel {
             // System.err.println("Sent " + request.requestName + "success!");
             return true;
         } else {
+            JOptionPane.showMessageDialog(null, conn.getResponseBody());
             return false;
         }
     }

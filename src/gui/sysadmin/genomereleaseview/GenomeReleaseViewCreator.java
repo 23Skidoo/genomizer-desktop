@@ -67,6 +67,8 @@ public class GenomeReleaseViewCreator {
     private String[] filenames;
     private JPanel fileProgressPanel;
     private ArrayList<JProgressBar> progressbars = new ArrayList<JProgressBar>();
+    private JTextField species;
+    private JButton speciesButton;
 
     public GenomeReleaseViewCreator() {
     }
@@ -315,12 +317,13 @@ public class GenomeReleaseViewCreator {
         JLabel specieLabel = new JLabel();
         specieLabel.setBorder(border);
         specieLabel.setText("Species");
-        JTextField specie = new JTextField(20);
+        species = new JTextField(20);
 
-        JButton button = new JButton("Add");
+        speciesButton = new JButton(SysStrings.GENOME_BUTTON_ADD_SPECIES);
+        speciesButton.addActionListener(buttonListener);
 
-        textNButton.add(specie, BorderLayout.CENTER);
-        textNButton.add(button, BorderLayout.EAST);
+        textNButton.add(species, BorderLayout.CENTER);
+        textNButton.add(speciesButton, BorderLayout.EAST);
 
         layout.setHorizontalGroup(layout.createSequentialGroup().addGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -594,5 +597,13 @@ public class GenomeReleaseViewCreator {
         JPanel mainPanel = new JPanel();
 
         return mainPanel;
+    }
+
+    public String getNewSpecies() {
+        return species.getText();
+    }
+    
+    public void clearNewSpecies() {
+        species.setText("");
     }
 }

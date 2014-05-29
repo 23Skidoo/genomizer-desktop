@@ -51,6 +51,10 @@ public class GenomeButtonListener implements ActionListener {
             case SysStrings.GENOME_BUTTON_CLOSE:
                 sysTab.getGenomeReleaseView().removeExtraInfoPanel();
                 break;
+            case SysStrings.GENOME_BUTTON_ADD_SPECIES:
+                sysController.addAnnotationValue("Species", sysTab.getGenomeReleaseView().getNewSpecies());
+                sysTab.getGenomeReleaseView().clearNewSpecies();
+                break;
         }
     }
 }

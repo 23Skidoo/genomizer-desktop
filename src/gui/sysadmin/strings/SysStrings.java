@@ -31,6 +31,7 @@ public class SysStrings {
     public final static String GENOME_BUTTON_CLEAR    = "Clear";
     public final static String GENOME_BUTTON_FILE     = "Browse files...";
     public static final String GENOME_BUTTON_CLOSE    = "Close";
+    public static final String GENOME_BUTTON_ADD_SPECIES = "Add";
 
     public final static String GENOME_POPUP_BUTTON_DELETE = "Delete genome";
     public final static String GENOME_POPUP_NAME          = "Delete genome release";

@@ -191,7 +191,7 @@ public class SysadminController {
 
             setGenomeReleaseTable();
             JOptionPane.showMessageDialog(null,
-                    "Added genom release " + gr.getSelectedVersion()
+                    "Added genom release " + gr.getVersionText()
                             + " for species " + gr.getSpeciesText());
         } else {
             JOptionPane.showMessageDialog(null, "Could not add genome release");

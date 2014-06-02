@@ -54,7 +54,7 @@ public class LoginWindow extends JFrame {
             
             @Override
             public void windowActivated(WindowEvent e) {
-                passwordField.requestFocusInWindow();
+                usernameField.requestFocusInWindow();
             }
         });
         setTitle("Genomizer Login");

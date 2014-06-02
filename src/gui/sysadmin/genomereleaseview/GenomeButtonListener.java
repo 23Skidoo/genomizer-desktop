@@ -55,6 +55,8 @@ public class GenomeButtonListener implements ActionListener {
             case SysStrings.GENOME_BUTTON_ADD_SPECIES:
                 sysController.addAnnotationValue("Species", sysTab.getGenomeReleaseView().getNewSpecies());
                 sysTab.getGenomeReleaseView().clearNewSpecies();
+                sysController.getSysTab().getGenomeReleaseView()
+                        .setSpeciesDDList(sysController.getSpecies());
                 break;
         }
     }

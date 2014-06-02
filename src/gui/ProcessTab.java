@@ -90,7 +90,7 @@ public class ProcessTab extends JPanel {
             "Ratio calculation option");
     private final JButton processFeedbackButton = new JButton(
             "Get process feedback");
-    private final JButton deleteButton = new JButton("Delete selected");
+    private final JButton deleteButton = new JButton("Remove selected");
     private JButton infoButton;
     
     private final JCheckBox printMean = new JCheckBox("Print mean");
